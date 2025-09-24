@@ -1,25 +1,17 @@
-// bin/jobsheet3tugas.dart
 import 'dart:io';
 
-/// Hitung faktorial dengan perulangan (loop)
 int factorial(int n) {
-  if (n < 0) return -1; // tandai invalid
-  int result = 1;
-  for (var i = 2; i <= n; i++) {
-    result *= i;
-  }
-  return result;
+  if (n < 0) throw ArgumentError('Angka tidak boleh negatif');
+  return List.generate(n, (i) => i + 1).fold(1, (a, b) => a * b);
 }
 
 void main() {
-  print('=== Jobsheet3Tugas (Factorial demo) ===');
-  stdout.write('Masukkan bilangan bulat >= 0: ');
-  final input = stdin.readLineSync();
-  final n = int.tryParse(input ?? '');
+  print('=== Factorial Demo ===');
+  stdout.write('Masukkan bilangan >= 0: ');
+  final n = int.tryParse(stdin.readLineSync() ?? '');
   if (n == null || n < 0) {
-    print('Input tidak valid. Berhenti.');
+    print('Input tidak valid.');
     return;
   }
-  final fact = factorial(n);
-  print('$n! = $fact');
+  print('$n! = ${factorial(n)}');
 }
